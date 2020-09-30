@@ -1,5 +1,13 @@
 package br.edu.utfpr.dv.sireata.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="comentarios")
+@Data
 public class Comentario {
 	
 	public enum SituacaoComentario{
@@ -37,13 +45,28 @@ public class Comentario {
 			}
 		}
 	}
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idcomentario")
 	private int idComentario;
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "idpauta", referencedColumnName = "idpauta", foreignKey = @ForeignKey(name = "fk_comentario_pauta"), nullable = false)
 	private Pauta pauta;
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "idusuario", referencedColumnName = "idusuario", foreignKey = @ForeignKey(name = "fk_comentario_usuario"), nullable = false)
 	private Usuario usuario;
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "idsituacao", referencedColumnName = "idsituacao", foreignKey = @ForeignKey(name = "fk_comentario_situacao"), nullable = false)
 	private SituacaoComentario situacao;
+	@Column(name="comentarios")
 	private String comentarios;
+	@Column(name="situacaoComentarios")
 	private SituacaoComentario situacaoComentarios;
+	@Column(name="motivo")
 	private String motivo;
 	
 	public Comentario(){
@@ -55,48 +78,4 @@ public class Comentario {
 		this.setComentarios("");
 		this.setMotivo("");
 	}
-	
-	public int getIdComentario() {
-		return idComentario;
-	}
-	public void setIdComentario(int idComentario) {
-		this.idComentario = idComentario;
-	}
-	public Pauta getPauta() {
-		return pauta;
-	}
-	public void setPauta(Pauta pauta) {
-		this.pauta = pauta;
-	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	public SituacaoComentario getSituacao() {
-		return situacao;
-	}
-	public void setSituacao(SituacaoComentario situacao) {
-		this.situacao = situacao;
-	}
-	public String getComentarios() {
-		return comentarios;
-	}
-	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
-	}
-	public SituacaoComentario getSituacaoComentarios() {
-		return situacaoComentarios;
-	}
-	public void setSituacaoComentarios(SituacaoComentario situacaoComentarios) {
-		this.situacaoComentarios = situacaoComentarios;
-	}
-	public String getMotivo() {
-		return motivo;
-	}
-	public void setMotivo(String motivo) {
-		this.motivo = motivo;
-	}
-
 }

@@ -1,12 +1,29 @@
 package br.edu.utfpr.dv.sireata.model;
 
+import lombok.Data;
+import lombok.ToString;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "campus")
+@ToString
+@Data
 public class Campus {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idcampus")
 	private int idCampus;
+	@Column(name="nome")
 	private String nome;
+	@Column(name="endereco")
 	private String endereco;
+	@Column(name="logo")
 	private byte[] logo;
+	@Column(name="ativo")
 	private boolean ativo;
+	@Column(name="site")
 	private String site;
 	
 	public Campus(){
@@ -17,46 +34,4 @@ public class Campus {
 		this.setAtivo(true);
 		this.setSite("");
 	}
-	
-	public int getIdCampus() {
-		return idCampus;
-	}
-	public void setIdCampus(int idCampus) {
-		this.idCampus = idCampus;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-	public byte[] getLogo() {
-		return logo;
-	}
-	public void setLogo(byte[] logo) {
-		this.logo = logo;
-	}
-	public boolean isAtivo() {
-		return ativo;
-	}
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-	public String getSite(){
-		return site;
-	}
-	public void setSite(String site){
-		this.site = site;
-	}
-	
-	public String toString(){
-		return this.getNome();
-	}
-
 }

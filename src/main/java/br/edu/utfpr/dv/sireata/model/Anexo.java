@@ -1,11 +1,28 @@
 package br.edu.utfpr.dv.sireata.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "anexos")
+@Data
 public class Anexo {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idanexo")
 	private int idAnexo;
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "idata", referencedColumnName = "idata", foreignKey = @ForeignKey(name = "fk_anexos_ata"), nullable = false)
 	private Ata ata;
+	@Column(name="ordem")
 	private int ordem;
+	@Column(name="descricao")
 	private String descricao;
+	@Column(name="arquivo")
 	private byte[] arquivo;
 	
 	public Anexo() {
@@ -15,36 +32,4 @@ public class Anexo {
 		this.setOrdem(0);
 		this.setArquivo(null);
 	}
-	
-	public int getIdAnexo() {
-		return idAnexo;
-	}
-	public void setIdAnexo(int idAnexo) {
-		this.idAnexo = idAnexo;
-	}
-	public Ata getAta() {
-		return ata;
-	}
-	public void setAta(Ata ata) {
-		this.ata = ata;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	public int getOrdem() {
-		return ordem;
-	}
-	public void setOrdem(int ordem) {
-		this.ordem = ordem;
-	}
-	public byte[] getArquivo() {
-		return arquivo;
-	}
-	public void setArquivo(byte[] arquivo) {
-		this.arquivo = arquivo;
-	}
-
 }

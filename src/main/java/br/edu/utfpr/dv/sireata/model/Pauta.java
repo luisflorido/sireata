@@ -1,11 +1,28 @@
 package br.edu.utfpr.dv.sireata.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="pautas")
+@Data
 public class Pauta {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idpauta")
 	private int idPauta;
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "idata", referencedColumnName = "idata", foreignKey = @ForeignKey(name = "fk_pauta_ata"), nullable = false)
 	private Ata ata;
+	@Column(name="ordem")
 	private int ordem;
+	@Column(name="titulo")
 	private String titulo;
+	@Column(name="descricao")
 	private String descricao;
 	
 	public Pauta(){
@@ -15,36 +32,4 @@ public class Pauta {
 		this.setTitulo("");
 		this.setDescricao("");
 	}
-	
-	public int getIdPauta() {
-		return idPauta;
-	}
-	public void setIdPauta(int idPauta) {
-		this.idPauta = idPauta;
-	}
-	public Ata getAta() {
-		return ata;
-	}
-	public void setAta(Ata ata) {
-		this.ata = ata;
-	}
-	public int getOrdem() {
-		return ordem;
-	}
-	public void setOrdem(int ordem) {
-		this.ordem = ordem;
-	}
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
 }
