@@ -2,6 +2,7 @@ package br.edu.utfpr.dv.sireata.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,11 +23,11 @@ public class Orgao {
 	private Departamento departamento;
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "idpresidente", referencedColumnName = "idpresidente", foreignKey = @ForeignKey(name = "fk_orgao_presidente"), nullable = false)
+	@JoinColumn(name = "idpresidente", referencedColumnName = "idusuario", foreignKey = @ForeignKey(name = "fk_orgao_presidente"), nullable = false)
 	private Usuario presidente;
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "idsecretario", referencedColumnName = "idsecretario", foreignKey = @ForeignKey(name = "fk_orgao_secretario"), nullable = false)
+	@JoinColumn(name = "idsecretario", referencedColumnName = "idusuario", foreignKey = @ForeignKey(name = "fk_orgao_secretario"), nullable = false)
 	private Usuario secretario;
 	@Column(name="nome")
 	private String nome;
@@ -36,7 +37,7 @@ public class Orgao {
 	private String designacaoPresidente;
 	@Column(name="ativo")
 	private boolean ativo;
-	@OneToMany(mappedBy = "membros")
+	@OneToMany(mappedBy = "orgao")
 	private List<OrgaoMembro> membros;
 
 	public Orgao(){

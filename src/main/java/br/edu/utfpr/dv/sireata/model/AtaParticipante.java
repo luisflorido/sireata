@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class AtaParticipante {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name="idataparticipante")
 	private int idAtaParticipante;
 	@JsonBackReference
@@ -20,7 +20,8 @@ public class AtaParticipante {
 	private Ata ata;
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "idparticipante", referencedColumnName = "idparticipante", foreignKey = @ForeignKey(name = "fk_ataparticipantes_participante"), nullable = false)
+	@JoinColumn(name = "idparticipante", referencedColumnName = "idusuario", foreignKey = @ForeignKey(name =
+			"fk_ataparticipantes_participante"), nullable = false)
 	private Usuario participante;
 	@Column(name = "presente")
 	private boolean presente;

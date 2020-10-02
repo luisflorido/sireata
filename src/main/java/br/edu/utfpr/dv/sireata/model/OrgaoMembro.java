@@ -10,6 +10,10 @@ import javax.persistence.*;
 @Data
 public class OrgaoMembro {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idmembros")
+	private int idMembros;
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "idorgao", referencedColumnName = "idorgao", foreignKey = @ForeignKey(name = "fk_membro_orgao"), nullable = false)

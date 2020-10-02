@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Anexo {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name="idanexo")
 	private int idAnexo;
 	@JsonBackReference

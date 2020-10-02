@@ -58,9 +58,7 @@ public class Comentario {
 	@ManyToOne
 	@JoinColumn(name = "idusuario", referencedColumnName = "idusuario", foreignKey = @ForeignKey(name = "fk_comentario_usuario"), nullable = false)
 	private Usuario usuario;
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name = "idsituacao", referencedColumnName = "idsituacao", foreignKey = @ForeignKey(name = "fk_comentario_situacao"), nullable = false)
+	@Column(name="situacao")
 	private SituacaoComentario situacao;
 	@Column(name="comentarios")
 	private String comentarios;

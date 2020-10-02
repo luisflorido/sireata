@@ -50,7 +50,7 @@ public class Ata {
 		}
 	}
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name="idata")
 	private int idAta;
 	@JsonBackReference
@@ -59,11 +59,12 @@ public class Ata {
 	private Orgao orgao;
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "idpresidente", referencedColumnName = "idpresidente", foreignKey = @ForeignKey(name = "fk_ata_presidente"), nullable = false)
+	@JoinColumn(name = "idpresidente", referencedColumnName = "idusuario", foreignKey = @ForeignKey(name =
+			"fk_ata_presidente"), nullable = false)
 	private Usuario presidente;
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "idsecretario", referencedColumnName = "idsecretario", foreignKey = @ForeignKey(name = "fk_ata_secretario"), nullable = false)
+	@JoinColumn(name = "idsecretario", referencedColumnName = "idusuario", foreignKey = @ForeignKey(name = "fk_ata_secretario"), nullable = false)
 	private Usuario secretario;
 	@Column(name="tipo")
 	private TipoAta tipo;
@@ -89,11 +90,11 @@ public class Ata {
 	private Date dataPublicacao;
 	@Column(name="documento")
 	private byte[] documento;
-	@OneToMany(mappedBy = "pautas")
+	@OneToMany(mappedBy = "ata")
 	private List<Pauta> pauta;
-	@OneToMany(mappedBy = "ataparticipantes")
+	@OneToMany(mappedBy = "ata")
 	private List<AtaParticipante> participantes;
-	@OneToMany(mappedBy = "anexos")
+	@OneToMany(mappedBy = "ata")
 	private List<Anexo> anexos;
 	
 	public Ata(){
